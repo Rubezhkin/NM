@@ -1,0 +1,4 @@
+﻿  Source.cpp
+D:\код\Лабы\ЧМ\laba1\laba1\Source.cpp(185,22): warning C4244: аргумент: преобразование "ULONGLONG" в "unsigned int", возможна потеря данных
+D:\код\Лабы\ЧМ\laba1\laba1\Source.cpp(305,1): warning C4326: возвращаемый тип "main" должен быть "int", а не "void"
+  laba1.vcxproj -> D:\код\Лабы\ЧМ\laba1\x64\Debug\laba1.exe
