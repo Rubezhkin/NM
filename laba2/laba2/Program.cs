@@ -180,7 +180,7 @@ class Laba2
         decimal acc = 0;
         for(int i = 0; i < N; i++)
             acc = Math.Max(acc,Math.Abs(x[i]-x_a[i])/Math.Max(Math.Abs(x_a[i]),(decimal)0.01));
-        using(StreamWriter sw = new StreamWriter("acc_test",true))
+        using(StreamWriter sw = new StreamWriter("acc_test.txt",true))
             {
                 sw.WriteLine($"{N} {L} {diap} {string.Format("{0:F40}",acc)}");
                 sw.Close();
