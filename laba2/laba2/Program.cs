@@ -6,14 +6,16 @@ class Laba2
 {
     public static void generation(int N, int L, int diap)
     {
-        double[][] matrix = new double[N][];
+        decimal[][] matrix = new decimal[N][];
         Random rnd = new Random();
         for(int i = 0; i < N; i++)
         {
-            matrix[i]= new double[Math.Min(L,N-i)];
-            matrix[i][0] = rnd.NextDouble()*diap;
+            matrix[i]= new decimal[Math.Min(L,N-i)];
+            matrix[i][0] = rnd.Next(diap);
+            while(matrix[i][0]==0)
+                matrix[i][0] = (decimal)(rnd.Next(diap*1000)/1000.0);
             for (int j = 1; j < Math.Min(L, N - i); j++)
-                    matrix[i][j] = rnd.NextDouble()*(diap*2)-diap;
+                    matrix[i][j] = (decimal)(rnd.Next(2*diap*1000)/1000.0-diap);
         }
 
         for(int i = N-1; i >=0; i--)
@@ -26,11 +28,11 @@ class Laba2
                         matrix[i][j] = matrix[k][ki]*matrix[k][kj];
                 }
 
-        double[] x = new double[N];
+        decimal[] x = new decimal[N];
         for(int i = 0; i < N; i++)
-            x[i] = rnd.NextDouble()*(diap*2)-diap;
+            x[i] = (decimal)(rnd.Next(diap*2*1000)/1000.0-diap);
 
-        double[] f = new double[N];
+        decimal[] f = new decimal[N];
         for(int i = 0; i < N; i++)
         {
             f[i] = 0;
@@ -76,27 +78,27 @@ class Laba2
             N = int.Parse(nums_arr[0]);
             L = int.Parse(nums_arr[1]);
 
-            double[][] matrix = new double[N][];
+            decimal[][] matrix = new decimal[N][];
             for (int i = 0; i < N; i++)
             {
-                matrix[i] = new double[Math.Min(L, N - i)];
+                matrix[i] = new decimal[Math.Min(L, N - i)];
                 nums = sr.ReadLine();
                 nums_arr = nums.Split();
                 for (int j = 0; j < Math.Min(L, N - i); j++)
-                    matrix[i][j] = double.Parse(nums_arr[j]);
+                    matrix[i][j] = decimal.Parse(nums_arr[j]);
             }
 
-            double[] f = new double[N];
+            decimal[] f = new decimal[N];
             nums = sr.ReadLine();
             nums_arr = nums.Split(' ');
             for (int i = 0; i < N; i++)
-                f[i] = double.Parse(nums_arr[i]);
+                f[i] = decimal.Parse(nums_arr[i]);
 
-            double[] x_t = new double[N];
+            decimal[] x_t = new decimal[N];
             nums = sr.ReadLine();
             nums_arr = nums.Split(' ');
             for (int i = 0; i < N; i++)
-               x_t[i] = double.Parse(nums_arr[i]);
+               x_t[i] = decimal.Parse(nums_arr[i]);
 
             bool flag = true;
             for (int i = 0; i < N && flag; i++)
@@ -107,7 +109,7 @@ class Laba2
                     flag = false;
                 else if (flag)
                 {
-                    matrix[i][0] = Math.Sqrt(matrix[i][0]);
+                    matrix[i][0] = (decimal)Math.Sqrt((double)matrix[i][0]);
                     for (int j = 1; j < Math.Min(L, N - i); j++)
                     {
                         for (int k = i - 1, ki = 1, kj = j + 1; k >= 0 && kj < L; k--, kj++, ki++)
@@ -163,21 +165,21 @@ class Laba2
     while(!solution());
     using(StreamReader sr = new StreamReader("result.txt"))
     {
-        double[] x = new double[N];
+        decimal[] x = new decimal[N];
         string nums = sr.ReadLine();
         string[] nums_arr = nums.Split(' ');
         for(int i = 0; i < N; i++)
-            x[i]= double.Parse(nums_arr[i]);
+            x[i]= decimal.Parse(nums_arr[i]);
 
-        double[] x_a = new double[N];
+        decimal[] x_a = new decimal[N];
         nums = sr.ReadLine();
         nums_arr = nums.Split(' ');
         for(int i = 0; i < N; i++)
-            x_a[i]= double.Parse(nums_arr[i]);
+            x_a[i]= decimal.Parse(nums_arr[i]);
         sr.Close();
-        double acc = 0;
+        decimal acc = 0;
         for(int i = 0; i < N; i++)
-            acc = Math.Max(acc,Math.Abs(x[i]-x_a[i])/Math.Max(Math.Abs(x_a[i]),0.01));
+            acc = Math.Max(acc,Math.Abs(x[i]-x_a[i])/Math.Max(Math.Abs(x_a[i]),(decimal)0.01));
         using(StreamWriter sw = new StreamWriter("acc_test",true))
             {
                 sw.WriteLine($"{N} {L} {diap} {string.Format("{0:F40}",acc)}");
@@ -187,6 +189,6 @@ class Laba2
    }
    public static void Main(String[] args)
     {
-        acc_test(50,32,10);
+        acc_test(100,20,10);
     }
 }
