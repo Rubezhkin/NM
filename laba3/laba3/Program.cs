@@ -1,4 +1,4 @@
-﻿namespace laba3
+namespace laba3
 {
     class Laba
     {
@@ -9,10 +9,23 @@
             for (int i = 0; i < arr.Length; i++)
                 arr[i] = (decimal)(rand.Next(2 * diap * 1000) / 1000.0 - diap);
 
-            for (int i = 0; i < arr.Length; i++) // сортировка
-                for (int j = i; j < arr.Length; j++)
-                    if (Math.Abs(arr[i]) < Math.Abs(arr[j]))
-                        (arr[i], arr[j]) = (arr[j], arr[i]);
+            decimal l1=0, l2=0;
+            int ind1 = -1, ind2 = -1;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (Math.Abs(arr[i]) >= Math.Abs(l1))
+                {
+                    l2 = l1;
+                    ind2 = ind1;
+                    l1 = arr[i];
+                    ind1 = i;
+                }
+                else if (Math.Abs(arr[i]) >= Math.Abs(l2))
+                {
+                    l2 = arr[i];
+                    ind2 = i;
+                }
+            }
 
             Matrix lambd = new Matrix(arr); // матрица со собственными значениями
             Matrix w = new Matrix(n, 1);
@@ -22,6 +35,7 @@
 
             for (int i = 0; i < arr.Length; i++)
                 arr[i] = 1;
+
             Matrix E = new Matrix(arr);
 
             Matrix H = E - 2 * (w * w.Transp()); // матрицы собственных векторов
@@ -38,8 +52,10 @@
                         sw.Write(string.Format("{0:F30}", A.matrix[i, j]) + ' ');
                     sw.WriteLine();
                 }
-                sw.WriteLine()
-                    ;
+                sw.WriteLine();
+
+                sw.WriteLine(ind1 + " " + ind2); // индекс максимального значения
+
                 for (int i = 0; i < n; i++) // собственные значения
                 {
                     sw.Write(string.Format("{0:F30}", lambd.matrix[i, i]) + ' ');
@@ -63,6 +79,7 @@
                 using (StreamWriter sw = new StreamWriter("res.txt")) // нужно только часть информации, поэтому сразу записываем в результат остальное
                 {
                     int n = Convert.ToInt32(sr.ReadLine()); // размерность
+                    int ind1, ind2;
                     string nums;
                     string[] nums_arr;
                     sr.ReadLine();
@@ -76,26 +93,38 @@
                             A.matrix[i, j] = decimal.Parse(nums_arr[j]);
                     }
                     sr.ReadLine();
+                    nums = sr.ReadLine();
+                    nums_arr = nums.Split();
+                    ind1 = int.Parse(nums_arr[0]);
+                    ind2 = int.Parse(nums_arr[1]);
 
                     decimal lambda_n; // собственное значение
                     nums = sr.ReadLine();
                     nums_arr = nums.Split();
-                    lambda_n = decimal.Parse(nums_arr[0]);
-                    sw.WriteLine(nums_arr[1]);
+                    lambda_n = decimal.Parse(nums_arr[ind1]);
+                    sw.WriteLine(nums_arr[ind2]);
                     sr.ReadLine();
                     sw.WriteLine();
 
                     Matrix x_n = new Matrix(n, 1); // собственный вектор
-                    nums = sr.ReadLine();
-                    nums_arr = nums.Split();
                     for (int i = 0; i < n; i++)
-                        x_n.matrix[i, 0] = decimal.Parse(nums_arr[i]);
-
-                    nums = sr.ReadLine();
-                    sw.WriteLine(nums);
-                    sw.WriteLine();
-
-                    A = A - lambda_n * (x_n * x_n.Transp());
+                    {
+                        nums = sr.ReadLine();
+                        if (ind1 == i)
+                        {
+                            nums_arr = nums.Split();
+                            for (int j = 0; j < n; j++)
+                                x_n.matrix[j, 0] = decimal.Parse(nums_arr[j]);
+                        }
+                        if (ind2 == i)
+                        {
+                            sw.WriteLine(nums);
+                            sw.WriteLine();
+                        }
+                    }
+                    
+                    Matrix A1;
+                    A1 = A - lambda_n * (x_n * x_n.Transp());
 
                     Matrix v = new Matrix();
                     int it = 0;
@@ -110,7 +139,7 @@
                         v = x_n;
                         v.Normalizing();
 
-                        x_n = A * v;
+                        x_n = A1 * v;
 
                         lambda = v.Transp() * x_n;
 
@@ -198,7 +227,7 @@
 
                 decimal r = decimal.Parse(sr.ReadLine());
 
-                using (StreamWriter sw = new StreamWriter("acc_res.txt",true))
+                using (StreamWriter sw = new StreamWriter("acc_res.txt", true))
                 {
                     sw.WriteLine(n + " " + diap + " " + string.Format("{0:E2}", eps) + " " + string.Format("{0:E2}", lambda) + " " + string.Format("{0:E2}", vec_acc) + " " + string.Format("{0:E2}", r) + " " + it_t);
                     sw.Close();
