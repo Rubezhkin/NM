@@ -1,0 +1,14 @@
+D:\код\Лабы\ЧМ\laba4\laba4\bin\Debug\net7.0\laba4.exe
+D:\код\Лабы\ЧМ\laba4\laba4\bin\Debug\net7.0\laba4.deps.json
+D:\код\Лабы\ЧМ\laba4\laba4\bin\Debug\net7.0\laba4.runtimeconfig.json
+D:\код\Лабы\ЧМ\laba4\laba4\bin\Debug\net7.0\laba4.dll
+D:\код\Лабы\ЧМ\laba4\laba4\bin\Debug\net7.0\laba4.pdb
+D:\код\Лабы\ЧМ\laba4\laba4\obj\Debug\net7.0\laba4.GeneratedMSBuildEditorConfig.editorconfig
+D:\код\Лабы\ЧМ\laba4\laba4\obj\Debug\net7.0\laba4.AssemblyInfoInputs.cache
+D:\код\Лабы\ЧМ\laba4\laba4\obj\Debug\net7.0\laba4.AssemblyInfo.cs
+D:\код\Лабы\ЧМ\laba4\laba4\obj\Debug\net7.0\laba4.csproj.CoreCompileInputs.cache
+D:\код\Лабы\ЧМ\laba4\laba4\obj\Debug\net7.0\laba4.dll
+D:\код\Лабы\ЧМ\laba4\laba4\obj\Debug\net7.0\refint\laba4.dll
+D:\код\Лабы\ЧМ\laba4\laba4\obj\Debug\net7.0\laba4.pdb
+D:\код\Лабы\ЧМ\laba4\laba4\obj\Debug\net7.0\laba4.genruntimeconfig.cache
+D:\код\Лабы\ЧМ\laba4\laba4\obj\Debug\net7.0\ref\laba4.dll
