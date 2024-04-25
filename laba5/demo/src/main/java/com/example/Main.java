@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        System.out.println(calculate("D:/код/Лабы/ЧМ/laba5/demo/src/main/resources/input.txt", "D:/код/Лабы/ЧМ/laba5/demo/src/main/resources/output.txt"));
+        System.out.println(calculate("путь", "путь"));
     }
 
     public static int calculate(String input, String output) throws Exception{
